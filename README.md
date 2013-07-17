@@ -23,10 +23,14 @@ puppet-cpanm
  
 * example class
 ```
-class foo::perl {
-      cpanm::env {'foo': user => 'foo',} ->
-      cpanm::install {'App::cpanminus': user => 'foo',} ->
-      cpanm::install {'Time::HiRes': user => 'foo',} ->
+class foo::perl::env {
+      cpanm::env {'foo': user => 'foo',}
+}
+class foo::perl::modules {
+      cpanm::install {'App::cpanminus': user => 'foo',}
+      cpanm::install {'Time::HiRes': user => 'foo',}
       cpanm::install {'Test::Most': user => 'foo',}
 }
+class{'foo::perl::env':} ->
+class{'foo::perl::modules':}
 ```
