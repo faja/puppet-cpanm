@@ -1,31 +1,30 @@
 define cpanm::env (
   $ensure      = present,
   $user        = 'root',
-  $locallib    = true,
   $homedir     = "/home/$user",
 ) {
 
-  if $user == 'root' and $locallib == true {
-    file {"/root/test":
+  if $user == 'root' {
+    file {"/root/bin":
+      ensure  => directory,
+    } ->
+    exec {"/root/bin/cpanm":
+      command => "curl -L http://cpanmin.us > /root/bin/cpanm",
+      unless  => "ls /root/bin/cpanm",
+      path    => ['/bin','/usr/bin/']
+    } ->
+    file {"/root/bin/cpanm":
       ensure => present,
-      content => "if\n",
+      mode   => 0744,
     }
   }
-  
-  elsif $user == 'root' {
-    file {"/root/test":
-      ensure => present,
-      content => "else\n",
-    }
-  }
-  
   else {
     file {"$homedir/bin":
       ensure  => directory,
       owner   => $user,
       group   => $user,
     } ->
-    exec {"$user-cpanm-bin":
+    exec {"$homedir/bin/cpanm":
       command => "curl -L http://cpanmin.us > $homedir/bin/cpanm",
       unless  => "ls $homedir/bin/cpanm",
       user    => $user,
@@ -34,6 +33,8 @@ define cpanm::env (
     file {"$homedir/bin/cpanm":
       ensure => present,
       mode   => 0744,
+      owner   => $user,
+      group   => $user,
     } ->
     exec {"$user-cpanm-local-lib":
       command => "su - $user -c \"cpanm --local-lib=$homedir/perl5 local::lib\"",
