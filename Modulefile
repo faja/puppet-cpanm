@@ -1,11 +1,11 @@
 name    'puppet-cpanm'
 version '0.0.1'
-source 'UNKNOWN'
-author 'puppet'
+source 'https://github.com/faja/puppet-cpanm'
+author 'faja'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'cpanm module'
+description 'Simple module to create local perl environment and install modules by cpanm binary'
+project_page 'https://github.com/faja/puppet-cpanm'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/stdlib', '>= 2.0.0'

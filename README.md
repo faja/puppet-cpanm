@@ -2,6 +2,10 @@ puppet-cpanm
 ============
 
 ####Usage
+* to install needed packages include cpanm class
+ ```
+ class{'cpanm'}
+ ```
 * to prepare local perl and cpanm environment for user "foo"   
 
  ```
@@ -28,9 +32,10 @@ class foo::perl::env {
 }
 class foo::perl::modules {
       cpanm::install {'App::cpanminus': user => 'foo',}
-      cpanm::install {'Time::HiRes': user => 'foo',}
+      cpanm::install {'Time::HiRes': user => 'foo',} ->
       cpanm::install {'Test::Most': user => 'foo',}
 }
+class{'cpanm'} ->
 class{'foo::perl::env':} ->
 class{'foo::perl::modules':}
 ```
