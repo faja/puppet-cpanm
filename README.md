@@ -9,6 +9,7 @@ puppet-cpanm
 * to install perl modules globally as root
  ```
  class{'cpanm':} ->
+
  cpanm::env {'root_cpanm_env':}
  cpanm::install {'App::cpanminus':}
  cpanm::install {'Time::HiRes':}
