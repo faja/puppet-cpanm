@@ -3,6 +3,7 @@ puppet-cpanm
 
 ####Usage
 * to install needed packages include cpanm class
+
  ```
  class{'cpanm'}
  ```
