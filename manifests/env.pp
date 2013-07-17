@@ -36,7 +36,7 @@ define cpanm::env (
       owner   => $user,
       group   => $user,
     } ->
-    exec {"$user_cpanm_local-lib":
+    exec {"$user.cpanm.local-lib":
       command => "su - $user -c \"cpanm --local-lib=$homedir/perl5 local::lib\"",
       unless  => "ls $homedir/perl5/lib/perl5/local/lib.pm",
       path    => ["$homedir/bin",'/bin','/usr/bin/']
