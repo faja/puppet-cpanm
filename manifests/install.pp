@@ -1,6 +1,7 @@
 define cpanm::install (
   $ensure = present,
   $user   = 'root',
+  $export = false,
 ) {
   
   $module = $name
@@ -11,8 +12,15 @@ define cpanm::install (
     }
   }
   else {
-    exec {"$module":
-      command => "/bin/su - $user -c \"cpanm $module\"",
+    if $export {
+      exec {"$module":
+        command => "/bin/su - $user -c \"$export cpanm $module\"",
+      }
+    }
+    else {
+      exec {"$module":
+        command => "/bin/su - $user -c \"cpanm $module\"",
+      }
     }
   }
 }
