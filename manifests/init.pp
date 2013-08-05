@@ -12,8 +12,9 @@ class cpanm {
 
   case $operatingsystem {
     'RedHat', 'CentOS': { 
-      if ! defined(Package['perl-devel']) { package { 'perl-devel': ensure => installed } }
-      if ! defined(Package['perl-CPAN'])  { package { 'perl-CPAN':  ensure => installed } }
+      if ! defined(Package['perl-devel'])        { package { 'perl-devel': ensure => installed } }
+      if ! defined(Package['perl-CPAN'])         { package { 'perl-CPAN':  ensure => installed } }
+      if ! defined(Package['perl-Test-Simple'])  { package { 'perl-Test-Simple':  ensure => installed } }
     }
     'Debian', 'Ubuntu': {
       if ! defined(Package['perl-base'])     { package { 'perl-base':     ensure => installed } }
